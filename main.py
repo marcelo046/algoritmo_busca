@@ -1,8 +1,19 @@
 import random
 size = 20
-list_numbers_any = random.sample(range(1, 101), size) 
-list_numbers_order = random.sample(range(1, 101), size)    #creating a list in range 0 to 100 
-list_numbers_order.sort()    # ordering
+
+# ============ funções ============
+def gen_random_list():
+    return random.sample(range(1, 101), size)
+
+def gen_order_list():
+    list = random.sample(range(1, 101), size)    #creating a list in range 0 to 100
+    list.sort()    # ordering
+    return list
+# ---------------------------------
+
+list_numbers_any = gen_random_list()
+list_numbers_order = gen_order_list()
+
 print(list_numbers_order)
 print(list_numbers_any)
 
