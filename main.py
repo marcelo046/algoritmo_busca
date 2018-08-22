@@ -25,7 +25,7 @@ def gen_graph(list, title='plot of points'):
     plt.title(title)
     plt.xlabel('x')
     plt.ylabel('points')
-    plt.plot( x , y , 'ro')
+    plt.plot( x , list , 'ro')
     plt.show()
 
 
@@ -40,3 +40,5 @@ search_number_order = random.choice(list_numbers_order)
 print(search_number_order)
 search_number_any = random.choice(list_numbers_any)
 print(search_number_any)
+gen_graph(list_numbers_order)
+gen_graph(list_numbers_any)
