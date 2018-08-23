@@ -5,6 +5,7 @@ import time
 
 # declarações
 size = 20
+loops = 100
 x = []
 time_sequential = []
 time_binary = []
@@ -28,7 +29,7 @@ def get_random_number():
 def sequential_search(number):
     for k in range(0,len(list_numbers_any),1):
         if(number == list_numbers_any[k]): return k
-    return -1   
+    return -1
 '''
 def binary_search(vet, num):
     less, high, tentativa = 0, len(vet), 1
@@ -49,7 +50,7 @@ def binary_search(number):
     high = len(list_numbers_order) - 1
     update = 0
     while(less <= high):
-        update = (less + high) // 2 
+        update = (less + high) // 2
         if(number < list_numbers_order[update]):
             high =update
         elif(number > list_numbers_order[update]):
@@ -60,14 +61,13 @@ def binary_search(number):
 def gen_graph(list, title='plot of points'):
     plt.cla()
     plt.clf()
-    #plt.close()
     plt.title(title)
     plt.xlabel('x')
     plt.ylabel('points')
     plt.plot( x , list , 'ro')
     plt.show()
-    
-def average_vector(vet):
+
+def average_vector(vet): # tira a média de um vetor
     add = 0
     for i in range(0, len(vet), 1):
         add += vet[i]
@@ -75,27 +75,30 @@ def average_vector(vet):
 
 
 # main
+
 list_numbers_any = gen_random_list()
 list_numbers_order = gen_order_list()
 
+print("números em ordem crescente")
 print(list_numbers_order)
-print(list_numbers_any)
-
-search_number_order = random.choice(list_numbers_order)
-print(search_number_order)
-search_number_any = random.choice(list_numbers_any)
-print(search_number_any)
 gen_graph(list_numbers_order)
+print("números em ordem aleatória")
+print(list_numbers_any)
 gen_graph(list_numbers_any)
 
-for it in range(0,20,1):
+# faz as buscas sequenciais
+for it in range(0,loops,1):
+    search_number_any = random.choice(list_numbers_any)
+    #print(search_number_any)
     start_s = time.time()
     sequential_search(search_number_any)
     finish_s = time.time()
     time_sequential.append(finish_s - start_s)
 
-    
-for it in range(0,20,1):
+# faz as buscas binárias
+for it in range(0,loops,1):
+    search_number_order = random.choice(list_numbers_order)
+    #print(search_number_order)
     start_s = time.time()
     binary_search( search_number_order)
     finish_s = time.time()
@@ -105,5 +108,6 @@ for it in range(0,20,1):
 time_1 = average_vector(time_binary)
 time_2 = average_vector(time_sequential)
 
+print("foram realizadas %d buscas em cada vetor\n" % loops)
 print("O tempo medio da binaria binario é: ", time_1)
 print("O tempo medio da busca sequencial é: ",time_2)
