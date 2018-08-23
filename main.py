@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 import time
 
 # declarações
-size = 20
-loops = 100
+size = 500 # não pode ser maior que max_number, pois dá erro no random.sample
+loops = 25
+max_number = 1000
 x = []
 time_sequential = []
 time_binary = []
@@ -16,10 +17,10 @@ for i in range(1, size+1):
 
 #  funções
 def gen_random_list():
-    return random.sample(range(1, 101), size)
+    return random.sample(range(1, max_number), size)
 
 def gen_order_list():
-    list = random.sample(range(1, 101), size)    #creating a list in range 0 to 100
+    list = random.sample(range(1, max_number), size)    #creating a list in range 0 to 100
     list.sort()    # ordering
     return list
 
@@ -30,20 +31,6 @@ def sequential_search(number):
     for k in range(0,len(list_numbers_any),1):
         if(number == list_numbers_any[k]): return k
     return -1
-'''
-def binary_search(vet, num):
-    less, high, tentativa = 0, len(vet), 1
-	while 1:
-		meio = (esquerda + direita) // 2
-		aux_num = vet[meio]
-		if num == aux_num:
-			return tentativa
-		elif num > aux_num:
-			esquerda = meio
-		else:
-			direita = meio
-		tentativa += 1
-'''
 
 def binary_search(number):
     less = 0
@@ -79,10 +66,10 @@ def average_vector(vet): # tira a média de um vetor
 list_numbers_any = gen_random_list()
 list_numbers_order = gen_order_list()
 
-print("números em ordem crescente")
+print("vetor de números em ordem crescente")
 print(list_numbers_order)
 gen_graph(list_numbers_order)
-print("números em ordem aleatória")
+print("vetor de números em ordem aleatória")
 print(list_numbers_any)
 gen_graph(list_numbers_any)
 
@@ -108,6 +95,7 @@ for it in range(0,loops,1):
 time_1 = average_vector(time_binary)
 time_2 = average_vector(time_sequential)
 
-print("foram realizadas %d buscas em cada vetor\n" % loops)
-print("O tempo medio da binaria binario é: ", time_1)
-print("O tempo medio da busca sequencial é: ",time_2)
+print("foram realizadas %d buscas em cada vetor de %d posições\n" % (loops, size))
+print("O tempo medio  da  busca  binario é: ", time_1*1000, " milissegundos")
+print("O tempo medio da busca sequencial é: ",time_2*1000, " milissegundos\n")
+print("Nesse caso, a busca binaria foi cerca de %.2f vezes mais rápido que a sequencial" % (time_2 / time_1))
